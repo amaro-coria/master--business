@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Datos de usuarios</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h2>Datos b&aacute;sicos</h2>
+    <p>A continuaci&oacute;n los datos de usuarios dados de alta en la base de datos</p>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido(s)</th>
+            <th>Direcci&oacute;n</th>
+            <th>C&oacute;digo postal</th>
+        </tr>
+        </thead>
+                <tr th:each="usr: ${users}">
+                    <th th:text="${usr.name}"></th>
+                    <th th:text="${usr.surname}"></th>
+                    <th th:text="${usr.address}"></th>
+                    <th th:text="${usr.zipCode}"></th>
+                </tr>
+        </tbody>
+    </table>
+    <br>
+    <hr>
+    <h3>Dar de alta una persona</h3>
+    <form action="#" th:action="@{/newUser}" th:object="${newUsr}" method="post">
+        <div class="row">
+            <div class="col-xs-10">
+                <div class="form-group">
+                    <label for="input_name">Nombre *</label>
+                    <input type="text" id="input_name" class="form-control" th:field="*{name}" required minlength="4">
+                </div>
+                <div class="form-group">
+                    <label for="input_apellido">Apellido(s)</label>
+                    <input type="text" id="input_apellido" class="form-control" th:field="*{surname}">
+                </div>
+                <div class="form-group">
+                    <label for="input_dir">Direcci&oacute;n</label>
+                    <input type="text" id="input_dir" class="form-control" th:field="*{address}">
+                </div>
+                <div class="form-group">
+                    <label for="input_zp">C&oacute;digo postal *</label>
+                    <input type="number" id="input_zp" class="form-control" th:field="*{zipCode}" required minlength="5" maxlength="5">
+                </div>
+            </div>
+
+        </div>
+        <button type="submit" >Agregar usuario</button>
+    </form>
+</div>
+
+</body>
+</html>
